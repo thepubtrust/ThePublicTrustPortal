@@ -1684,6 +1684,12 @@ span.author {
   background-color: var(--color-bg-8);
 }
 
+.item-type.habitat-restoration {
+  color: var(--color-black) !important;
+  background-color: var(--color-sage-green);
+  font-weight: var(--font-weight-normal) !important;
+}
+
 /* Sponsor spans - black font with light background */
 .sponsor {
   color: var(--color-black) !important;
