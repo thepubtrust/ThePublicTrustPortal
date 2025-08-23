@@ -736,7 +736,7 @@ body {
 }
 
 .column-title {
-  background-color: #EAF2F9;
+  background-color: #EAE7DC;
   padding: var(--space-16);
   margin: 0;
   font-size: var(--font-size-lg);
@@ -1047,8 +1047,9 @@ span {
 }
 
 .links-grid a:hover {
-  background-color: var(--color-secondary-hover);
+  background-color: rgba(var(--color-brown-600-rgb), 0.08);
   color: #6D8B6F;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -1634,7 +1635,7 @@ span.author {
 
 .item-type.public-lands {
   color: var(--color-black) !important;
-  background-color: var(--color-bg-3);
+  background-color: #EAF2F9;
 }
 
 .item-type.conservation-news {
@@ -1655,7 +1656,7 @@ span.author {
 
 .item-type.success-story {
   color: var(--color-black) !important;
-  background-color: var(--color-bg-3);
+  background-color: #EAF2F9;
 }
 
 .item-type.wildlife-study {
@@ -1681,7 +1682,7 @@ span.author {
 
 .item-type.public-lands-and-waters {
   color: var(--color-black) !important;
-  background-color: var(--color-bg-8);
+  background-color: #EAF2F9;
 }
 
 .item-type.habitat-restoration {
