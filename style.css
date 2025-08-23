@@ -572,7 +572,7 @@ select.form-control {
 :root {
   --color-forest-green: #2d5016;
   --color-earth-brown: #8b4513;
-  --color-sage-green: #9caf88;
+      --color-sage-green: #B2C6AE;
   --color-conservation-blue: #4a6741;
   
   /* New color scheme variables */
