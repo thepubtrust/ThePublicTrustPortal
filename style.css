@@ -572,7 +572,7 @@ select.form-control {
 :root {
   --color-forest-green: #2d5016;
   --color-earth-brown: #8b4513;
-      --color-sage-green: #B2C6AE;
+      --color-sage-green: #C2CBB4;
   --color-conservation-blue: #4a6741;
   
   /* New color scheme variables */
@@ -736,7 +736,7 @@ body {
 }
 
 .column-title {
-  background-color: var(--color-bg-3);
+  background-color: #EAF2F9;
   padding: var(--space-16);
   margin: 0;
   font-size: var(--font-size-lg);
