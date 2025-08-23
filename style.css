@@ -807,8 +807,8 @@ body {
 }
 
 .comment-period {
-  background-color: var(--color-bg-2);
-  color: var(--color-black) !important;
+  background-color: var(--color-error);
+  color: var(--color-white) !important;
 }
 
 .proposed-rule {
