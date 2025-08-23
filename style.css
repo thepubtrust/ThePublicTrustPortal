@@ -4,26 +4,27 @@
   --color-black: rgba(0, 0, 0, 1);
   --color-cream-50: rgba(252, 252, 249, 1);
   --color-cream-100: rgba(255, 255, 253, 1);
-  --color-gray-200: rgba(245, 245, 245, 1);
-  --color-gray-300: rgba(167, 169, 169, 1);
-  --color-gray-400: rgba(119, 124, 124, 1);
   --color-slate-500: rgba(98, 108, 113, 1);
   --color-brown-600: rgba(94, 82, 64, 1);
-  --color-charcoal-700: rgba(31, 33, 33, 1);
-  --color-charcoal-800: rgba(38, 40, 40, 1);
   --color-slate-900: rgba(19, 52, 59, 1);
-  --color-teal-300: rgba(50, 184, 198, 1);
-  --color-teal-400: rgba(45, 166, 178, 1);
   --color-teal-500: rgba(33, 128, 141, 1);
   --color-teal-600: rgba(29, 116, 128, 1);
   --color-teal-700: rgba(26, 104, 115, 1);
-  --color-teal-800: rgba(41, 150, 161, 1);
-  --color-red-400: rgba(255, 84, 89, 1);
   --color-red-500: rgba(192, 21, 47, 1);
-  --color-orange-400: rgba(230, 129, 97, 1);
   --color-orange-500: rgba(168, 75, 47, 1);
-  --color-burnt-orange: #d2691e;
   --color-american-red: #b22234;
+  
+  /* Site-specific hardcoded colors for consistency */
+  --color-sage-green: #6D8B6F;
+  --color-light-brown: #DCC5A1;
+  --color-light-cream: #FAF7F0;
+  --color-light-gray: #EAE7DC;
+  --color-light-blue: #b0e0e6;
+  --color-light-sky-blue: #A2B9E1;
+  --color-light-azure: #EAF2F9;
+  --color-orange: #FF6600;
+  --color-hemlock-green: #4a6741;
+  --color-burgundy-red: #800020;
 
   /* RGB versions for opacity control */
   --color-brown-600-rgb: 94, 82, 64;
@@ -31,9 +32,7 @@
   --color-slate-900-rgb: 19, 52, 59;
   --color-slate-500-rgb: 98, 108, 113;
   --color-red-500-rgb: 192, 21, 47;
-  --color-red-400-rgb: 255, 84, 89;
   --color-orange-500-rgb: 168, 75, 47;
-  --color-orange-400-rgb: 230, 129, 97;
 
   /* Background color tokens (Light Mode) */
   --color-bg-1: rgba(94, 130, 94, 0.08); /* Light sage green */
@@ -72,14 +71,9 @@
   --focus-outline: 2px solid var(--color-primary);
   --status-bg-opacity: 0.15;
   --status-border-opacity: 0.25;
-  --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  --select-caret: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 
-  /* RGB versions for opacity control */
-  --color-success-rgb: 33, 128, 141;
-  --color-error-rgb: 192, 21, 47;
-  --color-warning-rgb: 168, 75, 47;
-  --color-info-rgb: 98, 108, 113;
+
 
   /* Typography */
   --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
@@ -146,11 +140,22 @@
   --container-xl: 1280px;
 }
 
-/* Dark mode disabled - removed all dark mode styles */
+/* Light mode only - no theme switching */
 
-/* Dark mode disabled - removed all dark mode styles */
+/* Force consistent colors across all devices and browsers */
+* {
+  color-scheme: light only;
+  forced-color-adjust: none;
+}
 
-/* Light mode is now the default - no theme switching */
+/* Ensure no browser/system color overrides */
+html {
+  color-scheme: light only;
+}
+
+body {
+  color-scheme: light only;
+}
 
 /* Base styles */
 html {
@@ -225,7 +230,7 @@ a {
 }
 
 a:hover {
-  color: #6D8B6F;
+  color: var(--color-sage-green);
 }
 
 code,
@@ -356,16 +361,11 @@ select.form-control {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-image: var(--select-caret-light);
+  background-image: var(--select-caret);
   background-repeat: no-repeat;
   background-position: right var(--space-12) center;
   background-size: 16px;
   padding-right: var(--space-32);
-}
-
-/* Dark mode disabled - using light mode caret only */
-select.form-control {
-  background-image: var(--select-caret-light);
 }
 
 .form-control:focus {
@@ -555,7 +555,7 @@ select.form-control {
   outline-offset: 2px;
 }
 
-/* Dark mode disabled - removed dark mode button styling */
+
 
 @font-face {
   font-family: 'FKGroteskNeue';
@@ -568,28 +568,9 @@ select.form-control {
 /* END PERPLEXITY DESIGN SYSTEM */
 /* Site-specific styles building on the design system */
 
-/* Custom CSS Variables for The Public Trust */
-:root {
-  --color-forest-green: #2d5016;
-  --color-earth-brown: #8b4513;
-      --color-sage-green: #C2CBB4;
-  --color-conservation-blue: #4a6741;
-  
-  /* New color scheme variables */
-  --color-sage-green-header: #9caf88;
-  --color-royal-blue: #4169e1;
-  --color-burgundy-red: #800020;
-  --color-darker-sage: #6b7a5a;
-  --color-light-blue: #87ceeb;
-  --color-hemlock-green: #4a6741;
-  --color-light-cream: #f5f5dc;
-}
 
-/* Override some design system colors for conservation theme */
-[data-color-scheme="light"] {
-  --color-primary: var(--color-teal-600);
-  --color-text: var(--color-slate-900);
-}
+
+
 
 /* Base Layout */
 body {
@@ -617,7 +598,7 @@ body {
     font-family: 'League Spartan', sans-serif;
     font-size: calc(var(--font-size-4xl) * 1.44);
     font-weight: 700;
-    color: #6D8B6F;
+    color: var(--color-sage-green);
     margin: 0;
     letter-spacing: 2px;
 }
@@ -677,7 +658,7 @@ body {
 }
 
 .featured-headline a:hover {
-  color: #6D8B6F;
+  color: var(--color-sage-green);
 }
 
 .featured-summary {
@@ -702,7 +683,7 @@ body {
 /* Override story-meta for publications and sources - consistent with desktop */
 .story-meta .publication,
 .story-meta .source {
-  background-color: #DCC5A1 !important;
+  background-color: var(--color-light-brown) !important;
   color: var(--color-black) !important;
   padding: var(--space-2) var(--space-6) !important;
   border-radius: var(--radius-sm) !important;
@@ -710,7 +691,7 @@ body {
 
 /* Override story-meta for authors */
 .story-meta .author {
-  background-color: #FAF7F0 !important;
+  background-color: var(--color-light-cream) !important;
   padding: var(--space-2) var(--space-6) !important;
   border-radius: var(--radius-sm) !important;
 }
@@ -736,7 +717,7 @@ body {
 }
 
 .column-title {
-  background-color: #EAE7DC;
+  background-color: var(--color-light-gray);
   padding: var(--space-16);
   margin: 0;
   font-size: var(--font-size-lg);
@@ -774,7 +755,7 @@ body {
 }
 
 .news-item h4 a:hover {
-  color: #6D8B6F;
+  color: var(--color-sage-green);
 }
 
 .item-meta {
@@ -796,13 +777,13 @@ body {
 /* Override item-meta for publications and sources - consistent with desktop */
 .item-meta .publication,
 .item-meta .source {
-  background-color: #DCC5A1 !important;
+  background-color: var(--color-light-brown) !important;
   color: var(--color-black) !important;
 }
 
 /* Override item-meta for authors */
 .item-meta .author {
-  background-color: #FAF7F0 !important;
+  background-color: var(--color-light-cream) !important;
 }
 
 .deadline {
@@ -899,7 +880,7 @@ span {
 
 /* Source spans - consistent brown styling across all screen sizes */
 .source {
-  background-color: #DCC5A1 !important;
+  background-color: var(--color-light-brown) !important;
   color: var(--color-black) !important;
   padding: var(--space-2) var(--space-6) !important;
   border-radius: var(--radius-sm) !important;
@@ -907,7 +888,7 @@ span {
 
 /* Publication spans - consistent brown styling across all screen sizes */
 .publication {
-  background-color: #DCC5A1 !important;
+  background-color: var(--color-light-brown) !important;
   color: var(--color-black) !important;
   font-weight: var(--font-weight-medium);
   padding: var(--space-2) var(--space-6) !important;
@@ -916,7 +897,7 @@ span {
 
 /* Ensure publication spans in item-meta also get the styling */
 .item-meta .publication {
-  background-color: #DCC5A1 !important;
+  background-color: var(--color-light-brown) !important;
   color: var(--color-black) !important;
 }
 
@@ -933,7 +914,7 @@ span {
 /* Senators and Congresspeople - Black font, Light Sky Blue bubble */
 .sponsor {
   color: var(--color-black) !important;
-  background-color: #b0e0e6 !important;
+  background-color: var(--color-light-blue) !important;
 }
 
 /* Federal or State Agencies - Hemlock Green bubble, Light Cream font */
@@ -977,7 +958,7 @@ span {
 }
 
 .writing-item h4 a:hover {
-  color: #6D8B6F;
+  color: var(--color-sage-green);
 }
 
 .writing-meta {
@@ -1000,13 +981,13 @@ span {
 /* Override writing-meta for publications and sources - consistent with desktop */
 .writing-meta .publication,
 .writing-meta .source {
-  background-color: #DCC5A1 !important;
+  background-color: var(--color-light-brown) !important;
   color: var(--color-black) !important;
 }
 
 /* Override writing-meta for authors */
 .writing-meta .author {
-  background-color: #FAF7F0 !important;
+  background-color: var(--color-light-cream) !important;
 }
 
 /* Quick Links */
@@ -1048,7 +1029,7 @@ span {
 
 .links-grid a:hover {
   background-color: rgba(var(--color-brown-600-rgb), 0.08);
-  color: #6D8B6F;
+  color: var(--color-sage-green);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
@@ -1306,7 +1287,7 @@ span {
 /* Ensure source and publication get proper styling in item-meta - consistent with desktop */
 .item-meta .source,
 .item-meta .publication {
-  background-color: #DCC5A1 !important;
+  background-color: var(--color-light-brown) !important;
   padding: var(--space-2) var(--space-6) !important;
   border-radius: var(--radius-sm) !important;
   color: var(--color-black) !important;
@@ -1604,7 +1585,7 @@ span {
 
 /* Author spans - light cream bubble */
 .author {
-  background-color: #FAF7F0 !important;
+  background-color: var(--color-light-cream) !important;
   color: var(--color-black) !important;
   padding: var(--space-2) var(--space-6) !important;
   border-radius: var(--radius-sm) !important;
@@ -1614,12 +1595,12 @@ span {
 span.author,
 .item-meta .author,
 .writing-meta .author {
-  background-color: #FAF7F0 !important;
+  background-color: var(--color-light-cream) !important;
 }
 
 /* Test with a very obvious color to see if it's working */
 span.author {
-    background-color: #A2B9E1 !important;
+    background-color: var(--color-light-sky-blue) !important;
 }
 
 /* Item type spans - specific colors for different types */
@@ -1635,7 +1616,7 @@ span.author {
 
 .item-type.public-lands {
   color: var(--color-black) !important;
-  background-color: #EAF2F9;
+  background-color: var(--color-light-azure);
 }
 
 .item-type.conservation-news {
@@ -1656,7 +1637,7 @@ span.author {
 
 .item-type.success-story {
   color: var(--color-black) !important;
-  background-color: #EAF2F9;
+  background-color: var(--color-light-azure);
 }
 
 .item-type.wildlife-study {
@@ -1682,7 +1663,7 @@ span.author {
 
 .item-type.public-lands-and-waters {
   color: var(--color-black) !important;
-  background-color: #EAF2F9;
+  background-color: var(--color-light-azure);
 }
 
 .item-type.habitat-restoration {
@@ -1694,7 +1675,7 @@ span.author {
 /* Sponsor spans - black font with light background */
 .sponsor {
   color: var(--color-black) !important;
-  background-color: #b0e0e6 !important;
+  background-color: var(--color-light-blue) !important;
 }
 
 /* Federal agency sources - specific styling */
@@ -1715,12 +1696,12 @@ span:not(.story-category):not(.item-type.major-policy) {
 /* Override for source and publication spans to ensure brown background */
 span.source,
 span.publication {
-  background-color: #DCC5A1 !important;
+  background-color: var(--color-light-brown) !important;
 }
 
 /* Override for author spans to ensure light blue background */
 span.author {
-  background-color: #A2B9E1 !important;
+  background-color: var(--color-light-cream) !important;
 }
 
 /* Global span color override - ensures no blue text anywhere */
@@ -1731,7 +1712,7 @@ span {
 /* Final override for source and publication - consistent across all screen sizes */
 span.source,
 span.publication {
-  background-color: #DCC5A1 !important;
+  background-color: var(--color-light-brown) !important;
   color: var(--color-black) !important;
   padding: var(--space-2) var(--space-6) !important;
   border-radius: var(--radius-sm) !important;
@@ -1770,7 +1751,7 @@ span:not(.story-category):not(.item-type.major-policy) {
     font-family: 'League Spartan', sans-serif;
     font-size: calc(var(--font-size-4xl) * 1.2);
     font-weight: 700;
-    color: #6D8B6F;
+    color: var(--color-sage-green);
     margin: var(--space-12) 0 var(--space-8) 0;
     text-align: center;
     letter-spacing: 1px;
@@ -1863,7 +1844,7 @@ span:not(.story-category):not(.item-type.major-policy) {
 
 .state-links a:hover {
     background-color: var(--color-secondary);
-    color: #6D8B6F;
+    color: var(--color-sage-green);
 }
 
 /* Mobile Responsiveness for State Resources */
@@ -1901,10 +1882,51 @@ span:not(.story-category):not(.item-type.major-policy) {
 /* ===== COLOR CONSISTENCY ACROSS ALL SCREEN SIZES ===== */
 /* Force consistent colors regardless of screen size */
 
+/* Ensure all colors are consistent across mobile and desktop */
+@media (max-width: 768px) {
+  /* Force same colors on mobile as desktop */
+  .site-title,
+  .featured-headline a:hover,
+  .news-item h4 a:hover,
+  .writing-item h4 a:hover,
+  .links-grid a:hover,
+  .state-links a:hover,
+  .go-outside .section-title {
+    color: var(--color-sage-green) !important;
+  }
+  
+  /* Force same background colors on mobile as desktop */
+  .source,
+  .publication,
+  .story-meta .source,
+  .story-meta .publication,
+  .item-meta .source,
+  .item-meta .publication,
+  .writing-meta .source,
+  .writing-meta .publication {
+    background-color: var(--color-light-brown) !important;
+  }
+  
+  .author,
+  .story-meta .author,
+  .item-meta .author,
+  .writing-meta .author {
+    background-color: var(--color-light-cream) !important;
+  }
+  
+  .sponsor {
+    background-color: var(--color-light-blue) !important;
+  }
+  
+  .column-title {
+    background-color: var(--color-light-gray) !important;
+  }
+}
+
 /* Source and publication colors - consistent across all screen sizes */
 .source,
 .publication {
-    background-color: #DCC5A1 !important;
+    background-color: var(--color-light-brown) !important;
     color: var(--color-black) !important;
     padding: var(--space-2) var(--space-6) !important;
     border-radius: var(--radius-sm) !important;
@@ -1913,7 +1935,7 @@ span:not(.story-category):not(.item-type.major-policy) {
 
 /* Author colors - consistent across all screen sizes */
 .author {
-    background-color: #FAF7F0 !important;
+    background-color: var(--color-light-cream) !important;
     color: var(--color-black) !important;
     padding: var(--space-2) var(--space-6) !important;
     border-radius: var(--radius-sm) !important;
@@ -1947,8 +1969,8 @@ span:not(.story-category):not(.item-type.major-policy) {
 }
 
 .recent-indicator {
-    background-color: #FF6600;
-    color: #ffffff !important;
+    background-color: var(--color-orange);
+    color: var(--color-white) !important;
     padding: 2px 6px;
     border-radius: var(--radius-sm);
     font-size: var(--font-size-xs);
@@ -2003,8 +2025,8 @@ span.author,
 .featured-story .author,
 .news-column .news-item .author,
 .news-column .writing-item .author {
-    background-color: #FAF7F0 !important;
-    color: #000000 !important;
+    background-color: var(--color-light-cream) !important;
+    color: var(--color-black) !important;
     padding: 2px 6px !important;
     border-radius: 4px !important;
     font-weight: normal !important;
