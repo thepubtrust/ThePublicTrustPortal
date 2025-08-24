@@ -773,10 +773,6 @@ body {
   padding: var(--space-2) var(--space-6);
   border-radius: var(--radius-sm);
   color: var(--color-black) !important;
-  display: inline-flex;
-  align-items: center;
-  line-height: 1.2;
-  vertical-align: middle;
 }
 
 @media (max-width: 768px) {
@@ -785,25 +781,19 @@ body {
     font-size: var(--font-size-xs);
     padding: var(--space-1) var(--space-4);
     margin-right: var(--space-4);
-    display: inline-flex;
-    align-items: center;
+    display: inline-block;
     width: auto;
     max-width: none;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1;
-    vertical-align: middle;
-    min-height: 20px;
   }
 
-  /* Ensure meta container stays flex on mobile for consistent alignment */
+  /* Restore previous mobile behavior */
   .item-meta {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    align-items: center !important;
-    gap: var(--space-4) var(--space-4);
+    display: block !important;
+    flex-direction: unset !important;
+    flex-wrap: unset !important;
   }
 }
 
