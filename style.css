@@ -773,6 +773,28 @@ body {
   padding: var(--space-2) var(--space-6);
   border-radius: var(--radius-sm);
   color: var(--color-black) !important;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+  /* Make span bubbles much smaller and compact */
+  .item-meta span {
+    font-size: var(--font-size-xs);
+    padding: var(--space-1) var(--space-4);
+    margin-right: var(--space-4);
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    max-width: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+    vertical-align: middle;
+  }
 }
 
 /* Override item-meta for publications and sources - consistent with desktop */
@@ -1251,12 +1273,15 @@ span {
     font-size: var(--font-size-xs);
     padding: var(--space-1) var(--space-4);
     margin-right: var(--space-4);
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     width: auto;
     max-width: none;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.2;
+    vertical-align: middle;
   }
   
   /* Override the flexbox behavior that's causing full-width spans */
