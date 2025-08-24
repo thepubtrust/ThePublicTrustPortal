@@ -601,7 +601,7 @@ body {
 	color: var(--color-sage-green);
 	margin: 0;
 	letter-spacing: 2px;
-	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+	text-shadow: none !important;
 }
 
 .site-tagline {
