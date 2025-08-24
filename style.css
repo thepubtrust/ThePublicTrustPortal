@@ -2032,3 +2032,9 @@ span.author,
     border-radius: 4px !important;
     font-weight: normal !important;
 }
+
+.item-meta .state-code {
+  background-color: var(--color-light-blue) !important;
+  color: var(--color-black) !important;
+  font-weight: var(--font-weight-semibold);
+}
