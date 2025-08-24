@@ -792,8 +792,18 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.2;
+    line-height: 1;
     vertical-align: middle;
+    min-height: 20px;
+  }
+
+  /* Ensure meta container stays flex on mobile for consistent alignment */
+  .item-meta {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: var(--space-4) var(--space-4);
   }
 }
 
