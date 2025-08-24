@@ -595,12 +595,13 @@ body {
 }
 
 .site-title {
-    font-family: 'League Spartan', sans-serif;
-    font-size: calc(var(--font-size-4xl) * 1.44);
-    font-weight: 700;
-    color: var(--color-sage-green);
-    margin: 0;
-    letter-spacing: 2px;
+	font-family: 'League Spartan', sans-serif;
+	font-size: calc(var(--font-size-4xl) * 1.44);
+	font-weight: 700;
+	color: var(--color-sage-green);
+	margin: 0;
+	letter-spacing: 2px;
+	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
 }
 
 .site-tagline {
