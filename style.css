@@ -2074,7 +2074,7 @@ a[target="_blank"]::after {
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--color-primary);
+    background: var(--color-sage-green);
     color: white;
     padding: 4px 8px;
     border-radius: 4px;
