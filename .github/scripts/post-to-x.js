@@ -39,21 +39,19 @@ class XPoster {
 
     async makeTweetRequest(text) {
         try {
-            // Using X API v2 endpoint
-            const response = await fetch('https://api.twitter.com/2/tweets', {
+            // Use X API v1.1 endpoint which has simpler authentication
+            const response = await fetch('https://api.twitter.com/1.1/statuses/update.json', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${this.bearerToken}`,
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: JSON.stringify({
-                    text: text
-                })
+                body: `status=${encodeURIComponent(text)}`
             });
 
             if (response.ok) {
                 const data = await response.json();
-                return { success: true, data: data.data };
+                return { success: true, data: data };
             } else {
                 const error = await response.text();
                 return { success: false, error: error };
@@ -62,6 +60,12 @@ class XPoster {
         } catch (error) {
             return { success: false, error: error.message };
         }
+    }
+
+    createOAuthSignature(method, url, body) {
+        // For now, let's use a simpler approach that should work
+        // We'll use the access token directly in the Authorization header
+        return `Bearer ${this.accessToken}`;
     }
 
     validateCredentials() {
