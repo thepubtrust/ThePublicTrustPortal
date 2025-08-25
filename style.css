@@ -755,20 +755,11 @@ body {
 }
 
 /* Column Header Background Colors */
-.news-column:nth-child(1) .column-title {
-  background-color: rgba(179, 92, 76, 0.20) !important; /* Canyon Red, 20% opacity - more saturated */
-}
-
-.news-column:nth-child(2) .column-title {
-  background-color: rgba(137, 178, 189, 0.20) !important; /* Sky Blue, 20% opacity - swapped from conservation news */
-}
-
-.news-column:nth-child(3) .column-title {
-  background-color: rgba(158, 174, 147, 0.20) !important; /* Sage Green, 20% opacity - swapped from state issues */
-}
-
+.news-column:nth-child(1) .column-title,
+.news-column:nth-child(2) .column-title,
+.news-column:nth-child(3) .column-title,
 .news-column:nth-child(4) .column-title {
-  background-color: rgba(168, 146, 124, 0.20) !important; /* Trail Brown, 20% opacity - more saturated */
+  background-color: rgba(158, 174, 147, 0.35) !important; /* Light sage, 35% opacity - darker and more visible */
 }
 
 .news-items {
