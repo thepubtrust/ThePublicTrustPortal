@@ -7,9 +7,7 @@
     "test-extract": "node .github/scripts/extract-articles.js",
     "remove-twitter-auto": "rm -rf .github/workflows/twitter-auto.yml .github/scripts/ package.json"
   },
-  "dependencies": {
-    "node-fetch": "^2.6.7"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "keywords": ["twitter", "automation", "public-lands", "conservation", "free"],
   "author": "The Public Trust",

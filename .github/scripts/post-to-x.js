@@ -5,8 +5,7 @@
  * Posts new articles automatically using your X API credentials
  */
 
-// Import fetch for Node.js
-const fetch = require('node-fetch');
+// Node.js 18+ has built-in fetch, no need for node-fetch
 
 class XPoster {
     constructor() {
