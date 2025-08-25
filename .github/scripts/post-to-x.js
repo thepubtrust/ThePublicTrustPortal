@@ -5,6 +5,9 @@
  * Posts new articles automatically using your X API credentials
  */
 
+// Import fetch for Node.js
+const fetch = require('node-fetch');
+
 class XPoster {
     constructor() {
         this.apiKey = process.env.X_API_KEY;
