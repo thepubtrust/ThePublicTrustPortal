@@ -7,6 +7,7 @@ class PublicTrustApp {
     }
 
     init() {
+        this.removeExpiredItems();
         this.setupEventListeners();
         this.highlightRecentArticles();
         this.updateTimestamp();
@@ -107,6 +108,22 @@ class PublicTrustApp {
             element.addEventListener('touchend', () => {
                 element.style.transform = 'scale(1)';
             }, { passive: true });
+        });
+    }
+
+    removeExpiredItems() {
+        const now = new Date();
+        now.setHours(0, 0, 0, 0);
+        document.querySelectorAll('[data-expires]')?.forEach((element) => {
+            const expiresAttr = element.getAttribute('data-expires');
+            if (!expiresAttr) return;
+            // Interpret as YYYY-MM-DD; expire end of that day local time
+            const expiresDate = new Date(expiresAttr + 'T23:59:59');
+            if (isNaN(expiresDate.getTime())) return;
+            if (new Date() > expiresDate) {
+                const removable = element.closest('.news-item') || element;
+                removable.parentElement?.removeChild(removable);
+            }
         });
     }
 

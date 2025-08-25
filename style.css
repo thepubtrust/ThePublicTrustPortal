@@ -595,12 +595,13 @@ body {
 }
 
 .site-title {
-    font-family: 'League Spartan', sans-serif;
-    font-size: calc(var(--font-size-4xl) * 1.44);
-    font-weight: 700;
-    color: var(--color-sage-green);
-    margin: 0;
-    letter-spacing: 2px;
+	font-family: 'League Spartan', sans-serif;
+	font-size: calc(var(--font-size-4xl) * 1.44);
+	font-weight: 700;
+	color: var(--color-sage-green);
+	margin: 0;
+	letter-spacing: 2px;
+	text-shadow: none !important;
 }
 
 .site-tagline {
@@ -774,6 +775,28 @@ body {
   color: var(--color-black) !important;
 }
 
+@media (max-width: 768px) {
+  /* Make span bubbles much smaller and compact */
+  .item-meta span {
+    font-size: var(--font-size-xs);
+    padding: var(--space-1) var(--space-4);
+    margin-right: var(--space-4);
+    display: inline-block;
+    width: auto;
+    max-width: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Restore previous mobile behavior */
+  .item-meta {
+    display: block !important;
+    flex-direction: unset !important;
+    flex-wrap: unset !important;
+  }
+}
+
 /* Override item-meta for publications and sources - consistent with desktop */
 .item-meta .publication,
 .item-meta .source {
@@ -807,8 +830,14 @@ body {
 }
 
 .comment-period {
-  background-color: var(--color-bg-2);
-  color: var(--color-black) !important;
+  background-color: var(--color-error);
+  color: var(--color-white) !important;
+}
+
+/* Ensure featured headline comment period badge has white text and a subtle drop shadow */
+.featured-story .comment-period {
+  color: var(--color-white) !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
 }
 
 .proposed-rule {
@@ -1250,12 +1279,15 @@ span {
     font-size: var(--font-size-xs);
     padding: var(--space-1) var(--space-4);
     margin-right: var(--space-4);
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     width: auto;
     max-width: none;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.2;
+    vertical-align: middle;
   }
   
   /* Override the flexbox behavior that's causing full-width spans */
@@ -2030,4 +2062,20 @@ span.author,
     padding: 2px 6px !important;
     border-radius: 4px !important;
     font-weight: normal !important;
+}
+
+.item-meta .state-code {
+  background-color: var(--color-light-blue) !important;
+  color: var(--color-black) !important;
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Comment period: enforce red bubble, white text, and drop shadow sitewide */
+.item-type.comment-period,
+.comment-period,
+.comment-period * {
+    background-color: var(--color-error) !important;
+    color: var(--color-white) !important;
+    -webkit-text-fill-color: var(--color-white) !important;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
 }
