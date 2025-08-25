@@ -2031,6 +2031,27 @@ a[target="_blank"]::after {
     opacity: 0.6;
 }
 
+/* Enhanced external link styling for security awareness */
+.external-link {
+    position: relative;
+}
+
+.external-link:hover::before {
+    content: "External Link";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-primary);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0.9;
+}
+
 /* Touch effects for mobile */
 .news-item,
 .writing-item,

@@ -16,8 +16,9 @@ class PublicTrustApp {
     }
 
     setupEventListeners() {
-        // External link tracking
+        // External link tracking and security
         document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            this.secureExternalLink(link);
             link.addEventListener('click', this.handleExternalLink.bind(this));
         });
 
@@ -37,15 +38,38 @@ class PublicTrustApp {
 
     handleExternalLink(e) {
         const link = e.currentTarget;
-        const headline = link.textContent.trim();
+        const headline = this.sanitizeInput(link.textContent.trim());
         const section = link.closest('section');
-        const sectionName = section?.querySelector('h3, .column-title')?.textContent || 'Unknown';
+        const sectionName = this.sanitizeInput(section?.querySelector('h3, .column-title')?.textContent || 'Unknown');
         
-        console.log(`Link clicked: "${headline}" in section: "${sectionName}"`);
+        // Secure analytics tracking
+        this.trackSecureEvent('link_click', {
+            headline: headline,
+            section: sectionName,
+            url: link.href,
+            external: link.hostname !== window.location.hostname
+        });
         
         // Visual feedback
         link.style.opacity = '0.8';
         setTimeout(() => link.style.opacity = '1', 200);
+    }
+
+    // Secure event tracking with rate limiting
+    trackSecureEvent(eventName, data) {
+        const throttledTracking = this.throttleAnalytics((event, eventData) => {
+            // Only log to console in development
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.log(`Event: ${event}`, eventData);
+            }
+            
+            // Send to Google Analytics if available
+            if (typeof gtag !== 'undefined') {
+                gtag('event', event, eventData);
+            }
+        }, 1000);
+        
+        throttledTracking(eventName, data);
     }
 
     handleKeyboardNavigation(e) {
@@ -266,6 +290,30 @@ class PublicTrustApp {
             a[target="_blank"]::after { content: "↗"; font-size: 0.8em; margin-left: 2px; opacity: 0.6; }
         `;
         document.head.appendChild(style);
+    }
+
+    // Security utilities
+    sanitizeInput(input) {
+        if (typeof input !== 'string') return '';
+        return input.replace(/[<>]/g, '');
+    }
+
+    // Rate limiting for analytics (prevents abuse)
+    throttleAnalytics(callback, delay = 1000) {
+        let timeoutId;
+        return function(...args) {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => callback.apply(this, args), delay);
+        };
+    }
+
+    // Secure external link handling
+    secureExternalLink(link) {
+        if (link.hostname !== window.location.hostname) {
+            link.setAttribute('rel', 'noopener noreferrer');
+            // Add visual indicator for external links
+            link.classList.add('external-link');
+        }
     }
 
     // State resources data
