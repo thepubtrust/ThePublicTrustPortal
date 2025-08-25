@@ -1,0 +1,17 @@
+{
+  "name": "the-public-trust-twitter-auto",
+  "version": "1.0.0",
+  "description": "Twitter automation for The Public Trust website using free tools",
+  "private": true,
+  "scripts": {
+    "test-extract": "node .github/scripts/extract-articles.js",
+    "remove-twitter-auto": "rm -rf .github/workflows/twitter-auto.yml .github/scripts/ package.json"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  },
+  "devDependencies": {},
+  "keywords": ["twitter", "automation", "public-lands", "conservation", "free"],
+  "author": "The Public Trust",
+  "license": "MIT"
+}

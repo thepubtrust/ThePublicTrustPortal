@@ -1,0 +1,58 @@
+name: Auto-Tweet New Articles
+description: Automatically tweets new articles added to The Public Trust using free tools
+
+on:
+  push:
+    branches: [main]
+    paths: ['index.html']
+
+jobs:
+  detect-and-tweet:
+    runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, 'article') || contains(github.event.head_commit.message, 'Article')
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # Need previous commit to compare
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Extract new articles
+        id: extract
+        run: |
+          node .github/scripts/extract-articles.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Playwright
+        uses: microsoft/playwright-github-action@v1
+        with:
+          with-deps: true
+
+      - name: Auto-post to X
+        if: steps.extract.outputs.has_new_articles == 'true'
+        run: |
+          # Create the tweet content
+          TWEET_CONTENT="New on The Public Trust: ${{ steps.extract.outputs.headline }} ${{ steps.extract.outputs.link }} ${{ steps.extract.outputs.hashtags }} #PublicLands #Conservation #ThePublicTrust"
+          
+          echo "Preparing to post: $TWEET_CONTENT"
+          
+          # Use X API to post directly
+          node .github/scripts/post-to-x.js "$TWEET_CONTENT"
+
+      - name: Log tweet attempt
+        if: always()
+        run: |
+          echo "Tweet automation completed"
+          echo "New articles detected: ${{ steps.extract.outputs.has_new_articles }}"
+          echo "Headline: ${{ steps.extract.outputs.headline }}"
+          echo "Next step: Integrate with free Twitter automation service"
