@@ -2069,3 +2069,9 @@ span.author,
   color: var(--color-black) !important;
   font-weight: var(--font-weight-semibold);
 }
+
+/* Comment period: enforce white text and subtle drop shadow sitewide */
+.comment-period {
+    color: var(--color-white) !important;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+}
