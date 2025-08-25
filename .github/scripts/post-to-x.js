@@ -65,12 +65,19 @@ class XPoster {
     }
 
     validateCredentials() {
-        if (!this.bearerToken) {
-            console.error('❌ X_BEARER_TOKEN not found in environment variables');
+        console.log('🔍 Checking X API credentials...');
+        console.log('X_API_KEY:', this.apiKey ? '✅ Found' : '❌ Missing');
+        console.log('X_API_SECRET:', this.apiSecret ? '✅ Found' : '❌ Missing');
+        console.log('X_ACCESS_TOKEN:', this.accessToken ? '✅ Found' : '❌ Missing');
+        console.log('X_ACCESS_TOKEN_SECRET:', this.accessTokenSecret ? '✅ Found' : '❌ Missing');
+        console.log('X_BEARER_TOKEN:', this.bearerToken ? '✅ Found' : '❌ Missing');
+        
+        if (!this.apiKey || !this.apiSecret || !this.accessToken || !this.accessTokenSecret || !this.bearerToken) {
+            console.error('❌ Missing required X API credentials');
             return false;
         }
         
-        console.log('✅ X API credentials validated');
+        console.log('✅ All X API credentials validated');
         return true;
     }
 }
