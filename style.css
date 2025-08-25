@@ -844,8 +844,8 @@ body {
 /* Override item-meta for publications and sources - consistent with desktop */
 .item-meta .publication,
 .item-meta .source {
-  background-color: var(--color-light-brown) !important;
-  color: var(--color-black) !important;
+    background-color: #D8D8D8 !important; /* Light gray - subtle emphasis for credibility */
+    color: var(--color-black) !important;
 }
 
 /* Override item-meta for authors */
@@ -959,9 +959,9 @@ span {
   border-radius: var(--radius-sm) !important;
 }
 
-/* Publication spans - consistent brown styling across all screen sizes */
+/* Publication spans - consistent light gray styling across all screen sizes */
 .publication {
-  background-color: var(--color-light-brown) !important;
+  background-color: #D8D8D8 !important; /* Light gray - subtle emphasis for credibility */
   color: var(--color-black) !important;
   font-weight: var(--font-weight-medium);
   padding: var(--space-2) var(--space-6) !important;
@@ -970,7 +970,7 @@ span {
 
 /* Ensure publication spans in item-meta also get the styling */
 .item-meta .publication {
-  background-color: var(--color-light-brown) !important;
+  background-color: #D8D8D8 !important; /* Light gray - subtle emphasis for credibility */
   color: var(--color-black) !important;
 }
 
@@ -1054,7 +1054,7 @@ span {
 /* Override writing-meta for publications and sources - consistent with desktop */
 .writing-meta .publication,
 .writing-meta .source {
-  background-color: var(--color-light-brown) !important;
+  background-color: #D8D8D8 !important; /* Light gray - subtle emphasis for credibility */
   color: var(--color-black) !important;
 }
 
@@ -2148,7 +2148,7 @@ span.author,
 }
 
 .tag-source {
-    background-color: #ECEAE5 !important; /* Light beige - unified neutral color */
+    background-color: #D8D8D8 !important; /* Light gray - subtle emphasis for credibility */
     color: #1B1B1B !important;
 }
 
