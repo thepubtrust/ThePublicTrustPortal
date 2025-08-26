@@ -13,7 +13,6 @@ class PublicTrustApp {
         this.updateTimestamp();
         this.initStateDropdown();
         this.addDynamicStyles();
-        this.scheduleFeaturedSwap();
     }
 
     setupEventListeners() {
@@ -293,92 +292,7 @@ class PublicTrustApp {
         document.head.appendChild(style);
     }
 
-    // Schedule promotion of Federal Register article to Featured on/after 2025-08-28
-    scheduleFeaturedSwap() {
-        try {
-            const activationDate = new Date('2025-08-28T00:00:00');
-            const now = new Date();
-            if (now < activationDate) return;
-
-            const frUrl = 'https://www.federalregister.gov/documents/2025/08/05/2025-14846/malheur-umatilla-and-wallowa-whitman-national-forests-oregon-and-washington-revision-of-the-land';
-            const featuredCard = document.querySelector('.featured-story .featured-card');
-            if (!featuredCard) return;
-
-            const featuredHeadlineLink = featuredCard.querySelector('.featured-headline a');
-            if (!featuredHeadlineLink) return;
-
-            // If already promoted, exit
-            if (featuredHeadlineLink.href === frUrl) return;
-
-            // Capture current featured to move to State Issues
-            const oldFeatured = {
-                title: this.sanitizeInput(featuredHeadlineLink.textContent?.trim() || ''),
-                href: featuredHeadlineLink.href || '',
-                date: this.sanitizeInput(featuredCard.querySelector('.story-meta .date')?.textContent?.trim() || ''),
-                source: this.sanitizeInput(featuredCard.querySelector('.story-meta .source')?.textContent?.trim() || ''),
-                publication: this.sanitizeInput(featuredCard.querySelector('.story-meta .publication')?.textContent?.trim() || ''),
-                author: this.sanitizeInput(featuredCard.querySelector('.story-meta .author')?.textContent?.trim() || '')
-            };
-
-            // Locate the Federal Register item in the lists
-            const frItemLink = document.querySelector(`.news-item a[href="${frUrl}"]`);
-            const frItem = frItemLink?.closest('.news-item');
-
-            // Extract FR data
-            const frTitle = this.sanitizeInput(frItemLink?.textContent?.trim() || 'Revision of the Land Management Plans - Malheur, Umatilla, and Wallowa-Whitman National Forests; Oregon and Washington');
-            const frAuthors = this.sanitizeInput(frItem?.querySelector('.author')?.textContent?.trim() || 'USDA Forest Service');
-
-            // Update Featured card content
-            const categoryEl = featuredCard.querySelector('.story-category');
-            if (categoryEl) categoryEl.textContent = 'Regulatory Announcement';
-
-            featuredHeadlineLink.href = frUrl;
-            featuredHeadlineLink.textContent = frTitle;
-
-            const summaryEl = featuredCard.querySelector('.featured-summary');
-            if (summaryEl) summaryEl.textContent = 'Public comment period is open for the forest plan revisions.';
-
-            const metaEl = featuredCard.querySelector('.story-meta');
-            if (metaEl) {
-                metaEl.innerHTML = `
-                        <span class="date">August 5, 2025</span>
-                        <span class="tag-comment-period">Comments due Oct 6</span>
-                        <span class="source">Federal Register</span>
-                        <span class="author">${frAuthors}</span>
-                `;
-            }
-
-            // Remove FR item from its original list to avoid duplication
-            if (frItem && frItem.parentElement) {
-                frItem.parentElement.removeChild(frItem);
-            }
-
-            // Move previous featured into State Issues (prepend)
-            if (oldFeatured.href) {
-                const stateIssuesColumn = Array.from(document.querySelectorAll('.news-column')).find(col => col.querySelector('.column-title')?.textContent?.includes('State Issues'));
-                const stateItems = stateIssuesColumn?.querySelector('.news-items');
-                if (stateItems && !document.querySelector(`.news-item a[href="${oldFeatured.href}"]`)) {
-                    const article = document.createElement('article');
-                    article.className = 'news-item';
-                    article.innerHTML = `
-                            <h4><a href="${oldFeatured.href}" target="_blank" rel="noopener">${oldFeatured.title}</a></h4>
-                            <div class="item-meta">
-                                ${oldFeatured.date ? `<span class="date">${oldFeatured.date}</span>` : ''}
-                                ${oldFeatured.source ? `<span class="source">${oldFeatured.source}</span>` : ''}
-                                ${oldFeatured.publication ? `<span class="publication">${oldFeatured.publication}</span>` : ''}
-                                ${oldFeatured.author ? `<span class="author">${oldFeatured.author}</span>` : ''}
-                            </div>
-                    `;
-                    stateItems.insertBefore(article, stateItems.firstChild);
-                }
-            }
-        } catch (err) {
-            // Fail silently to avoid breaking the page
-            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                console.error('scheduleFeaturedSwap error:', err);
-            }
-        }
-    }
+    
 
     // Security utilities
     sanitizeInput(input) {
