@@ -13,6 +13,7 @@ class PublicTrustApp {
         this.updateTimestamp();
         this.initStateDropdown();
         this.addDynamicStyles();
+        this.rotateFeaturedIfDue();
     }
 
     setupEventListeners() {
@@ -290,6 +291,75 @@ class PublicTrustApp {
             a[target="_blank"]::after { content: "↗"; font-size: 0.8em; margin-left: 2px; opacity: 0.6; }
         `;
         document.head.appendChild(style);
+    }
+
+    rotateFeaturedIfDue() {
+        try {
+            const featuredCard = document.querySelector('.featured-card');
+            if (!featuredCard) return;
+            const rotateOn = featuredCard.getAttribute('data-rotate-on');
+            const targetSelector = featuredCard.getAttribute('data-rotate-target-selector');
+            if (!rotateOn || !targetSelector) return;
+            const rotateDate = new Date(rotateOn + 'T00:00:00');
+            if (isNaN(rotateDate.getTime())) return;
+            const now = new Date();
+            // Rotate on or after the date
+            if (now >= rotateDate) {
+                const targetArticle = document.querySelector(targetSelector);
+                if (!targetArticle) return;
+
+                // Extract content from target article
+                const headlineLink = targetArticle.querySelector('h4 a');
+                const meta = targetArticle.querySelector('.item-meta, .writing-meta');
+                if (!headlineLink || !meta) return;
+
+                // Update featured headline and link
+                const featuredHeadline = featuredCard.querySelector('.featured-headline a');
+                if (featuredHeadline) {
+                    featuredHeadline.href = headlineLink.href;
+                    featuredHeadline.textContent = headlineLink.textContent.trim();
+                }
+
+                // Build summary if present (none in this template)
+                const featuredSummary = featuredCard.querySelector('.featured-summary');
+                if (featuredSummary) {
+                    featuredSummary.textContent = featuredSummary.textContent; // leave as-is if exists
+                }
+
+                // Update story-meta: replicate tags while keeping classes
+                const storyMeta = featuredCard.querySelector('.story-meta');
+                if (storyMeta) {
+                    storyMeta.innerHTML = '';
+                    const dateEl = meta.querySelector('.date');
+                    if (dateEl) {
+                        const span = document.createElement('span');
+                        span.className = 'date';
+                        span.textContent = dateEl.textContent.trim();
+                        storyMeta.appendChild(span);
+                    }
+                    // Copy over recognizable tag chip spans
+                    meta.querySelectorAll('span').forEach(s => {
+                        const cls = s.className || '';
+                        if (cls.includes('tag-') || cls.includes('source') || cls.includes('publication') || cls.includes('author')) {
+                            const clone = document.createElement('span');
+                            clone.className = cls;
+                            clone.textContent = s.textContent.trim();
+                            storyMeta.appendChild(clone);
+                        }
+                    });
+                }
+
+                // Remove original article from its column
+                const removable = targetArticle.closest('.news-item') || targetArticle;
+                removable.parentElement?.removeChild(removable);
+
+                // Prevent repeated rotations
+                featuredCard.removeAttribute('data-rotate-on');
+                featuredCard.removeAttribute('data-rotate-target-selector');
+            }
+        } catch (e) {
+            // Fail silently on rotate errors to avoid breaking page
+        }
     }
 
     // Security utilities
