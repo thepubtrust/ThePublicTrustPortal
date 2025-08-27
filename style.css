@@ -875,6 +875,37 @@ body {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
 }
 
+/* Critical Alert Styling for urgent/breaking news */
+.critical-alert {
+  background: linear-gradient(135deg, var(--color-error) 0%, #d32f2f 50%, var(--color-error) 100%);
+  border: 3px solid #fff;
+  box-shadow: 0 0 20px rgba(244, 67, 54, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.1);
+  animation: critical-pulse 2s ease-in-out infinite alternate;
+}
+
+.critical-alert .featured-headline a {
+  color: var(--color-white) !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  font-weight: var(--font-weight-bold);
+}
+
+.critical-alert .story-meta .tag-major-policy {
+  background-color: var(--color-white) !important;
+  color: var(--color-error) !important;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@keyframes critical-pulse {
+  0% {
+    box-shadow: 0 0 20px rgba(244, 67, 54, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(244, 67, 54, 0.8), inset 0 0 30px rgba(255, 255, 255, 0.2);
+  }
+}
+
 .proposed-rule {
   background-color: var(--color-bg-4);
   color: var(--color-black) !important;
