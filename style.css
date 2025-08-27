@@ -2215,6 +2215,17 @@ span.author,
     color: #1B1B1B !important;
 }
 
+/* New tags for Outdoor Writing */
+.tag-habitat {
+    background-color: #ECEAE5 !important;
+    color: #1B1B1B !important;
+}
+
+.tag-horses {
+    background-color: #ECEAE5 !important;
+    color: #1B1B1B !important;
+}
+
 /* Base Tag Chip Styling */
 .tag-date,
 .tag-source,
@@ -2228,6 +2239,8 @@ span.author,
 .tag-state,
 .tag-comment-period,
 .tag-habitat-restoration,
+.tag-habitat,
+.tag-horses,
 .tag-success-story,
 .tag-news-analysis {
     display: inline-block;
@@ -2263,6 +2276,8 @@ span.tag-regulatory,
 span.tag-conservation,
 span.tag-public-lands,
 span.tag-habitat-restoration,
+span.tag-habitat,
+span.tag-horses,
 span.tag-news-analysis {
     color: #1B1B1B !important;
     -webkit-text-fill-color: #1B1B1B !important;
