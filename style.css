@@ -724,6 +724,26 @@ body {
   border-radius: var(--radius-sm) !important;
 }
 
+/* Story Subheading */
+.story-subheading {
+  margin-top: var(--space-16);
+  margin-bottom: var(--space-24);
+  padding-top: var(--space-16);
+  border-top: 1px solid var(--color-border);
+}
+
+.story-subheading a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.story-subheading a:hover {
+  color: var(--color-sage-green);
+}
+
 
 
 /* News Grid */
@@ -780,8 +800,9 @@ body {
 
 .news-item h4 {
   margin: 0 0 var(--space-8) 0;
-  font-size: var(--font-size-md);
+  font-size: calc(var(--font-size-md) * 1.1);
   line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-medium);
 }
 
 .news-item h4 a {
@@ -830,6 +851,28 @@ body {
     flex-direction: unset !important;
     flex-wrap: unset !important;
   }
+
+  /* Public Comment Opportunities Mobile Styles */
+  .comment-opportunities-grid {
+    gap: var(--space-8);
+  }
+
+  .comment-opportunity {
+    padding: var(--space-16);
+  }
+
+  .opportunity-title {
+    font-size: var(--font-size-md);
+  }
+
+  .opportunity-meta {
+    gap: var(--space-6);
+  }
+
+  .opportunity-meta span {
+    font-size: var(--font-size-xs);
+    padding: var(--space-1) var(--space-4);
+  }
 }
 
 /* Override item-meta for publications and sources - consistent with desktop */
@@ -865,7 +908,7 @@ body {
 }
 
 .comment-period {
-  background-color: var(--color-error);
+  background-color: #E8A87C;
   color: var(--color-white) !important;
 }
 
@@ -907,7 +950,7 @@ body {
 }
 
 .proposed-rule {
-  background-color: var(--color-bg-4);
+  background-color: #E8A87C;
   color: var(--color-black) !important;
 }
 
@@ -957,8 +1000,8 @@ body {
 }
 
 .major-policy {
-  background-color: var(--color-error);
-  color: var(--color-white) !important;
+  background-color: #E8A87C;
+  color: var(--color-black) !important;
   font-weight: var(--font-weight-semibold);
 }
 
@@ -1044,7 +1087,7 @@ span {
 
 /* writing-meta styles removed - standardized on item-meta */
 
-/* Quick Links */
+/* Quick Links Section - Full Width */
 .quick-links {
   background-color: var(--color-surface);
   border: 1px solid var(--color-card-border);
@@ -1052,6 +1095,15 @@ span {
   padding: var(--space-24);
   margin: 0 auto var(--space-32) auto;
   max-width: 1600px;
+  text-align: center;
+}
+
+/* Quick Links */
+.quick-links {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-24);
   text-align: center;
 }
 
@@ -1085,6 +1137,135 @@ span {
   background-color: rgba(var(--color-brown-600-rgb), 0.08);
   color: var(--color-sage-green);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Public Comment Opportunities Section - Full Width */
+.public-comment-opportunities {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-24);
+  margin: 0 auto var(--space-32) auto;
+  max-width: 1600px;
+  text-align: center;
+}
+
+/* Ensure no shadows on any elements within Public Comment Opportunities */
+.public-comment-opportunities * {
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.public-comment-opportunities .section-title {
+  margin-bottom: var(--space-20);
+  text-align: center;
+}
+
+.comment-opportunities-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.comment-opportunity {
+  background-color: var(--color-card);
+  border: none;
+  border-radius: var(--radius-base);
+  padding: var(--space-16) var(--space-20);
+  transition: all var(--duration-fast) var(--ease-standard);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.comment-opportunity:hover {
+  background-color: var(--color-surface);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.opportunity-title {
+  margin: 0;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-semibold);
+  flex: 1;
+  text-align: left;
+}
+
+.comment-opportunity {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.opportunity-title a:hover {
+  color: var(--color-sage-green);
+}
+
+.opportunity-meta {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--space-8);
+  font-size: var(--font-size-xs);
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.opportunity-meta .deadline {
+  background-color: #E8A87C !important; /* Lighter, brighter orange - more white */
+  color: var(--color-white) !important;
+  padding: var(--space-2) var(--space-6);
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-medium);
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.opportunity-meta .source {
+  background-color: var(--color-light-brown);
+  color: var(--color-black);
+  padding: var(--space-2) var(--space-6);
+  border-radius: var(--radius-sm);
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.opportunity-meta .tag-regulatory,
+.opportunity-meta .tag-public-lands,
+.opportunity-meta .tag-energy,
+.opportunity-meta .tag-conservation,
+.opportunity-meta .tag-state {
+  background-color: var(--color-secondary);
+  color: var(--color-black);
+  padding: var(--space-2) var(--space-6);
+  border-radius: var(--radius-sm);
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* Enforce consistent tag order for Public Comment Opportunities ONLY */
+.public-comment-opportunities .opportunity-meta .tag-state {
+  order: 1; /* State tags always first */
+}
+
+.public-comment-opportunities .opportunity-meta .tag-regulatory,
+.public-comment-opportunities .opportunity-meta .tag-public-lands,
+.public-comment-opportunities .opportunity-meta .tag-energy,
+.public-comment-opportunities .opportunity-meta .tag-conservation {
+  order: 2; /* Type tags always second */
+}
+
+.public-comment-opportunities .opportunity-meta .source {
+  order: 3; /* Source always third */
+}
+
+.public-comment-opportunities .opportunity-meta .deadline {
+  order: 4; /* Deadline always last (rightmost) */
 }
 
 
@@ -1999,7 +2180,7 @@ span:not(.story-category):not(.item-type.major-policy) {
 
 /* ===== RECENT ARTICLES AND INDICATORS ===== */
 .recent-article {
-    border-left: 3px solid var(--color-primary);
+    border-left: none;
     background-color: var(--color-bg-1);
 }
 
@@ -2085,14 +2266,14 @@ span.author,
 
 /* Old state-code rule removed - now using tag-state */
 
-/* Comment period: enforce red bubble, white text, and drop shadow sitewide */
+/* Comment period: remove background highlighting, keep orange tags */
 .item-type.comment-period,
 .comment-period,
 .comment-period * {
-    background-color: var(--color-error) !important;
-    color: var(--color-white) !important;
-    -webkit-text-fill-color: var(--color-white) !important;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+    background-color: transparent !important;
+    color: var(--color-text) !important;
+    -webkit-text-fill-color: var(--color-text) !important;
+    text-shadow: none;
 }
 
 /* ===== TAG CHIP COLOR SYSTEM ===== */
@@ -2111,23 +2292,23 @@ span.author,
 
 /* Urgency/Severity Chips with Drop Shadows */
 .tag-major-policy {
-    background-color: #B35C4C !important; /* Weathered red */
-    color: #FFFFFF !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    background-color: #E8A87C !important; /* Bright light orange - same as deadline tags */
+    color: #1B1B1B !important;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
     opacity: 1 !important; /* Full color for urgency */
 }
 
 .tag-regulatory {
     background-color: #E8C76A !important; /* Aspen yellow */
     color: #1B1B1B !important; /* Black text */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
     opacity: 1 !important; /* Full color for urgency */
 }
 
 .tag-proposed-amendment {
-    background-color: #CF7356 !important; /* Weathered orange */
-    color: #FFFFFF !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    background-color: #E8A87C !important; /* Bright light orange - same as deadline tags */
+    color: #000000 !important;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
     opacity: 1 !important; /* Full color for urgency */
 }
 
@@ -2162,7 +2343,7 @@ span.author,
 .tag-comment-period {
     background-color: #CF7356 !important; /* Weathered orange - unified urgency color */
     color: #FFFFFF !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
     opacity: 1 !important; /* Full color for urgency */
 }
 
@@ -2225,14 +2406,19 @@ span.author,
 
 /* Tag Chip Text Colors - Maximum Specificity Override */
 /* White text chips (dark backgrounds) */
-span.tag-major-policy,
-span.tag-proposed-amendment,
 span.tag-state,
 span.tag-comment-period,
 span.tag-success,
 span.tag-success-story {
     color: #FFFFFF !important;
     -webkit-text-fill-color: #FFFFFF !important;
+}
+
+/* Orange background chips with black text */
+span.tag-major-policy,
+span.tag-proposed-amendment {
+    color: #1B1B1B !important;
+    -webkit-text-fill-color: #1B1B1B !important;
 }
 
 /* Black text chips (light backgrounds) */

@@ -169,7 +169,6 @@ class PublicTrustApp {
             const timeframe = this.getTimeframe(articleDate, today, yesterday, twoDaysAgo);
             if (timeframe) {
                 item.classList.add('recent-article');
-                this.addRecentIndicator(item, timeframe);
             }
         });
     }
@@ -285,7 +284,7 @@ class PublicTrustApp {
     addDynamicStyles() {
         const style = document.createElement('style');
         style.textContent = `
-            .recent-article { border-left: 3px solid var(--color-primary); background-color: var(--color-bg-1); }
+            .recent-article { border-left: none; background-color: var(--color-bg-1); }
             .recent-indicator { animation: fadeIn 0.5s ease-in; }
             @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
             a[target="_blank"]::after { content: "↗"; font-size: 0.8em; margin-left: 2px; opacity: 0.6; }
