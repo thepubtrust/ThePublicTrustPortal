@@ -123,7 +123,7 @@ class PublicTrustApp {
     }
 
     setupTouchEffects() {
-        const interactiveElements = document.querySelectorAll('.news-item, .writing-item, .links-grid a');
+        const interactiveElements = document.querySelectorAll('.news-item, .links-grid a');
         
         interactiveElements.forEach(element => {
             element.addEventListener('touchstart', () => {
@@ -159,7 +159,7 @@ class PublicTrustApp {
         const twoDaysAgo = new Date(today);
         twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
         
-        document.querySelectorAll('.news-item, .writing-item').forEach(item => {
+        document.querySelectorAll('.news-item').forEach(item => {
             const dateElement = item.querySelector('.date');
             if (!dateElement) return;
             
@@ -310,7 +310,7 @@ class PublicTrustApp {
 
                 // Extract content from target article
                 const headlineLink = targetArticle.querySelector('h4 a');
-                const meta = targetArticle.querySelector('.item-meta, .writing-meta');
+                const meta = targetArticle.querySelector('.item-meta');
                 if (!headlineLink || !meta) return;
 
                 // Update featured headline and link

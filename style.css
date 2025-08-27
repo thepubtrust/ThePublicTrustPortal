@@ -1040,50 +1040,9 @@ span {
 
 
 
-/* Writing Items within News Columns */
-.writing-item h4 {
-  margin: 0 0 var(--space-8) 0;
-  font-size: var(--font-size-md);
-}
+/* Writing item styles removed - standardized on news-item */
 
-.writing-item h4 a {
-  color: var(--color-text);
-  text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-standard);
-}
-
-.writing-item h4 a:hover {
-  color: var(--color-sage-green);
-}
-
-.writing-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-8);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
-}
-
-.writing-meta span {
-  background-color: var(--color-secondary);
-  padding: var(--space-2) var(--space-6);
-  border-radius: var(--radius-sm);
-  display: inline-block;
-  margin-right: var(--space-4);
-  color: var(--color-black) !important;
-}
-
-/* Override writing-meta for publications and sources - consistent with desktop */
-.writing-meta .publication,
-.writing-meta .source {
-  background-color: #D8D8D8 !important; /* Light gray - subtle emphasis for credibility */
-  color: var(--color-black) !important;
-}
-
-/* Override writing-meta for authors */
-.writing-meta .author {
-  background-color: var(--color-light-cream) !important;
-}
+/* writing-meta styles removed - standardized on item-meta */
 
 /* Quick Links */
 .quick-links {
@@ -1181,9 +1140,7 @@ span {
     margin: 0 auto var(--space-32) auto;
   }
 
-  .writing-items {
-    grid-template-columns: 1fr;
-  }
+  /* writing-items styles removed - standardized on news-items */
 
   .links-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1236,8 +1193,7 @@ span {
   }
 
   .news-item h4 a,
-  .featured-headline a,
-  .writing-item h4 a {
+  .featured-headline a {
     color: var(--color-text) !important;
     text-decoration: underline;
   }
@@ -1417,18 +1373,7 @@ span {
     color: var(--color-black) !important;
   }
   
-  .writing-meta span {
-    font-size: var(--font-size-xs);
-    padding: var(--space-1) var(--space-4);
-    margin-right: var(--space-4);
-    display: inline-block;
-    width: auto;
-    max-width: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: var(--color-black) !important;
-  }
+  /* writing-meta styles removed - standardized on item-meta */
   
   /* Keep same spacing and layout as desktop */
   .featured-card {
@@ -1691,8 +1636,7 @@ span {
 
 /* Force override for all author spans */
 span.author,
-.item-meta .author,
-.writing-meta .author {
+.item-meta .author {
   background-color: var(--color-light-cream) !important;
 }
 
@@ -1982,7 +1926,6 @@ span:not(.story-category):not(.item-type.major-policy) {
   .site-title,
   .featured-headline a:hover,
   .news-item h4 a:hover,
-  .writing-item h4 a:hover,
   .links-grid a:hover,
   .state-links a:hover,
   .go-outside .section-title {
@@ -1995,16 +1938,13 @@ span:not(.story-category):not(.item-type.major-policy) {
   .story-meta .source,
   .story-meta .publication,
   .item-meta .source,
-  .item-meta .publication,
-  .writing-meta .source,
-  .writing-meta .publication {
+  .item-meta .publication {
     background-color: var(--color-light-brown) !important;
   }
   
   .author,
   .story-meta .author,
-  .item-meta .author,
-  .writing-meta .author {
+  .item-meta .author {
     background-color: var(--color-light-cream) !important;
   }
   
@@ -2117,14 +2057,12 @@ a[target="_blank"]::after {
 
 /* Touch effects for mobile */
 .news-item,
-.writing-item,
 .links-grid a {
     transition: transform 0.1s ease;
 }
 
 /* Focus styles for keyboard navigation */
 .news-item:focus,
-.writing-item:focus,
 .links-grid a:focus {
     outline: var(--focus-ring);
     border-radius: var(--radius-sm);
@@ -2134,13 +2072,10 @@ a[target="_blank"]::after {
 .author,
 span.author,
 .item-meta .author,
-.writing-meta .author,
 .story-meta .author,
 .news-item .author,
-.writing-item .author,
 .featured-story .author,
-.news-column .news-item .author,
-.news-column .writing-item .author {
+.news-column .news-item .author {
     background-color: #ECEAE5 !important; /* Light beige - unified neutral color */
     color: var(--color-black) !important;
     padding: 2px 6px !important;
