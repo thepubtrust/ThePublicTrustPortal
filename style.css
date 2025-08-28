@@ -937,17 +937,52 @@ body {
   @media (max-width: 768px) {
     .comment-opportunity {
       display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
     }
     
     .comment-opportunity .opportunity-title {
       display: block !important;
       margin-bottom: var(--space-8) !important;
+      width: 100% !important;
+      max-width: 100% !important;
     }
     
     .comment-opportunity .opportunity-meta {
       display: flex !important;
       flex-wrap: wrap !important;
       gap: var(--space-4) !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+  }
+
+  /* Nuclear option: completely override the desktop layout on mobile */
+  @media (max-width: 768px) {
+    .public-comment-opportunities .comment-opportunity {
+      display: block !important;
+      flex-direction: unset !important;
+      align-items: unset !important;
+      justify-content: unset !important;
+      text-align: left !important;
+    }
+    
+    .public-comment-opportunities .comment-opportunity .opportunity-title {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-bottom: var(--space-8) !important;
+      text-align: left !important;
+    }
+    
+    .public-comment-opportunities .comment-opportunity .opportunity-meta {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: var(--space-4) !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      justify-content: flex-start !important;
+      align-items: flex-start !important;
     }
   }
 }
@@ -2548,4 +2583,62 @@ span.tag-horses,
 span.tag-news-analysis {
     color: #1B1B1B !important;
     -webkit-text-fill-color: #1B1B1B !important;
+}
+
+/* ===== MOBILE PCO LAYOUT FIXES - HIGH PRIORITY ===== */
+/* These styles come at the end to ensure they override desktop styles */
+
+@media (max-width: 768px) {
+  /* Force PCO mobile layout with maximum specificity */
+  .public-comment-opportunities .comment-opportunities-grid .comment-opportunity {
+    display: block !important;
+    flex-direction: unset !important;
+    align-items: unset !important;
+    justify-content: unset !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: var(--space-16) !important;
+    text-align: left !important;
+  }
+
+  .public-comment-opportunities .comment-opportunities-grid .comment-opportunity .opportunity-title {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    margin-bottom: var(--space-8) !important;
+    order: 1 !important;
+  }
+
+  .public-comment-opportunities .comment-opportunities-grid .comment-opportunity .opportunity-meta {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: var(--space-4) !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    order: 2 !important;
+    margin-top: var(--space-4) !important;
+  }
+
+  .public-comment-opportunities .comment-opportunities-grid .comment-opportunity .opportunity-meta span {
+    font-size: var(--font-size-xs) !important;
+    padding: var(--space-2) var(--space-4) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 120px !important;
+    display: inline-block !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Complete flexbox reset for mobile PCO */
+  .public-comment-opportunities .comment-opportunities-grid .comment-opportunity,
+  .public-comment-opportunities .comment-opportunities-grid .comment-opportunity .opportunity-title,
+  .public-comment-opportunities .comment-opportunities-grid .comment-opportunity .opportunity-meta {
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    flex-basis: auto !important;
+  }
 }
