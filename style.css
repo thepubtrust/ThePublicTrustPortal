@@ -859,21 +859,27 @@ body {
 
   .comment-opportunity {
     padding: var(--space-16);
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
     gap: var(--space-8);
+    text-align: left;
   }
 
   .opportunity-title {
     font-size: var(--font-size-md);
     width: 100%;
+    flex: none !important;
+    margin-bottom: var(--space-4);
   }
 
   .opportunity-meta {
     gap: var(--space-4);
-    flex-wrap: wrap;
+    flex-wrap: wrap !important;
     width: 100%;
-    justify-content: flex-start;
+    justify-content: flex-start !important;
+    flex: none !important;
+    order: 2;
   }
 
   .opportunity-meta span {
@@ -884,6 +890,28 @@ body {
     text-overflow: ellipsis;
     max-width: 120px;
     display: inline-block;
+    flex-shrink: 0;
+  }
+
+  /* Force mobile layout overrides */
+  .comment-opportunity > * {
+    flex: none !important;
+  }
+  
+  .comment-opportunity .opportunity-title {
+    order: 1;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .comment-opportunity .opportunity-meta {
+    order: 2;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
   }
 }
 
@@ -1385,12 +1413,29 @@ span {
   /* Extra small mobile PCO adjustments */
   .comment-opportunity {
     padding: var(--space-12);
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+  }
+
+  .opportunity-title {
+    width: 100% !important;
+    flex: none !important;
+    margin-bottom: var(--space-6);
+  }
+
+  .opportunity-meta {
+    width: 100% !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    gap: var(--space-3);
   }
 
   .opportunity-meta span {
     max-width: 100px;
     font-size: var(--font-size-xs);
     padding: var(--space-1) var(--space-3);
+    flex-shrink: 0;
   }
 }
 
