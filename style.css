@@ -2585,6 +2585,19 @@ span.tag-news-analysis {
     -webkit-text-fill-color: #1B1B1B !important;
 }
 
+/* ===== COMMENT LINK STYLING ===== */
+.comment-link {
+    color: #FF0000 !important;
+    -webkit-text-fill-color: #FF0000 !important;
+    text-decoration: none;
+}
+
+.comment-link:hover {
+    color: #CC0000 !important;
+    -webkit-text-fill-color: #CC0000 !important;
+    text-decoration: underline;
+}
+
 /* ===== MOBILE PCO LAYOUT FIXES - HIGH PRIORITY ===== */
 /* These styles come at the end to ensure they override desktop styles */
 
