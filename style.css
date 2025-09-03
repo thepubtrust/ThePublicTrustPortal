@@ -1188,6 +1188,12 @@ span {
   color: var(--color-btn-primary-text) !important;
 }
 
+/* Make news-item deadline tags match PCO deadline styling */
+.item-meta .deadline {
+  background-color: #E8A87C !important; /* Bright light orange - same as PCO deadline tags */
+  color: var(--color-white) !important;
+}
+
 .bill-number {
   background-color: var(--color-primary) !important;
   color: var(--color-btn-primary-text) !important;
