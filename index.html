@@ -15,6 +15,13 @@
         page_title: 'The Public Trust',
         page_location: window.location.href
       });
+      
+      // Send page view event
+      gtag('event', 'page_view', {
+        page_title: 'The Public Trust',
+        page_location: window.location.href,
+        page_path: window.location.pathname
+      });
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
