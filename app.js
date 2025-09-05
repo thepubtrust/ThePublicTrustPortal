@@ -447,14 +447,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Analytics tracking
 window.addEventListener('load', () => {
-    // Send page view to Google Analytics
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'page_view', {
-            page_title: document.title,
-            page_location: window.location.href,
-            page_path: window.location.pathname
-        });
-    }
+    // Wait a bit for GA4 to fully load, then send page view
+    setTimeout(() => {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                page_title: document.title,
+                page_location: window.location.href,
+                page_path: window.location.pathname
+            });
+            console.log('GA4 page view sent');
+        } else {
+            console.log('GA4 gtag not available');
+        }
+    }, 100);
     
     console.log('Page view tracked:', {
         url: window.location.href,
