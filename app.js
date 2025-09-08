@@ -11,6 +11,7 @@ class PublicTrustApp {
         this.setupEventListeners();
         this.highlightRecentArticles();
         this.sortArticlesByDate();
+        this.sortPublicCommentOpportunitiesByDeadline();
         this.updateTimestamp();
         this.initStateDropdown();
         this.addDynamicStyles();
@@ -252,6 +253,62 @@ class PublicTrustApp {
         } catch (e) {
             // Fail silently to avoid impacting UX
         }
+    }
+
+    // Sort Public Comment Opportunities by deadline (soonest first)
+    sortPublicCommentOpportunitiesByDeadline() {
+        try {
+            const grid = document.querySelector('.comment-opportunities-grid');
+            if (!grid) return;
+
+            const cards = Array.from(grid.querySelectorAll('a.comment-opportunity'));
+            if (cards.length <= 1) return;
+
+            const parsed = cards.map(card => {
+                const deadlineText = card.querySelector('.deadline')?.textContent?.trim() || '';
+                const time = this.parseDeadlineToTime(deadlineText);
+                return { card, time };
+            });
+
+            parsed.sort((a, b) => {
+                const aTime = a.time ?? Number.POSITIVE_INFINITY;
+                const bTime = b.time ?? Number.POSITIVE_INFINITY;
+                return aTime - bTime; // soonest first
+            });
+
+            parsed.forEach(({ card }) => grid.appendChild(card));
+        } catch (_) {
+            // fail silently
+        }
+    }
+
+    // Convert a deadline string like "Comments due: Sep 19, 2025" to a timestamp
+    parseDeadlineToTime(deadlineText) {
+        if (!deadlineText) return null;
+        const text = deadlineText.replace(/^[^:]*:\s*/, '').trim(); // remove prefix before colon
+        const currentYear = new Date().getFullYear();
+
+        // Patterns to try: "Sep 19, 2025", "Sep 19", "September 2025", "Oct 2025"
+        const patterns = [
+            { regex: /(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s*(\d{4})/i, build: m => `${m[1]} ${m[2]}, ${m[3]}` },
+            { regex: /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2}),\s*(\d{4})/i, build: m => `${m[1]} ${m[2]}, ${m[3]}` },
+            { regex: /(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})/i, build: m => `${m[1]} ${m[2]}, ${currentYear}` },
+            { regex: /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})/i, build: m => `${m[1]} ${m[2]}, ${currentYear}` },
+            { regex: /(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})/i, build: m => `${m[1]} 1, ${m[2]}` },
+            { regex: /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{4})/i, build: m => `${m[1]} 1, ${m[2]}` },
+        ];
+
+        for (const p of patterns) {
+            const m = text.match(p.regex);
+            if (m) {
+                const d = new Date(p.build(m));
+                if (!isNaN(d.getTime())) return d.getTime();
+            }
+        }
+
+        // Fallback: try Date(text) directly
+        const d = new Date(text);
+        return isNaN(d.getTime()) ? null : d.getTime();
     }
 
     updateTimestamp() {
