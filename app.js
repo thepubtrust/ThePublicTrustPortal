@@ -10,6 +10,7 @@ class PublicTrustApp {
         this.removeExpiredItems();
         this.setupEventListeners();
         this.highlightRecentArticles();
+        this.sortArticlesByDate();
         this.updateTimestamp();
         this.initStateDropdown();
         this.addDynamicStyles();
@@ -228,6 +229,29 @@ class PublicTrustApp {
         
         const headline = item.querySelector('h4');
         headline?.appendChild(indicator);
+    }
+
+    // Sort all article lists by their displayed date (newest first)
+    sortArticlesByDate() {
+        try {
+            const containers = Array.from(document.querySelectorAll('.news-items'));
+            containers.forEach(container => {
+                const items = Array.from(container.querySelectorAll('.news-item'));
+                if (items.length <= 1) return;
+
+                const sortable = items.map(item => {
+                    const dateText = item.querySelector('.date')?.textContent?.trim() || '';
+                    const parsedDate = this.parseArticleDate(dateText);
+                    return { item, time: parsedDate ? parsedDate.getTime() : 0 };
+                });
+
+                sortable.sort((a, b) => b.time - a.time);
+
+                sortable.forEach(({ item }) => container.appendChild(item));
+            });
+        } catch (e) {
+            // Fail silently to avoid impacting UX
+        }
     }
 
     updateTimestamp() {
