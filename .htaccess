@@ -1,0 +1,43 @@
+# Security Headers and HTTPS Enforcement
+# This file provides server-level security enhancements
+
+# Force HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Security Headers
+Header always set X-Content-Type-Options nosniff
+Header always set X-Frame-Options DENY
+Header always set X-XSS-Protection "1; mode=block"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+# Content Security Policy (backup to meta tags)
+Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+
+# Prevent access to sensitive files
+<Files ~ "\.(htaccess|htpasswd|env|log|sql|bak|old|tmp)$">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Disable directory browsing
+Options -Indexes
+
+# Prevent access to hidden files
+<Files ~ "^\.">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Cache control for static assets
+<FilesMatch "\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$">
+    Header set Cache-Control "public, max-age=31536000"
+</FilesMatch>
+
+# Cache control for HTML files (shorter cache for updates)
+<FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "public, max-age=3600"
+</FilesMatch>
