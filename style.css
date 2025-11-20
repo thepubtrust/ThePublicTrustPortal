@@ -701,13 +701,15 @@ body {
 
 .featured-comment-link {
   margin-bottom: var(--space-16);
+  margin-top: 0;
 }
 
 .featured-comment-link a {
   color: var(--color-text);
   text-decoration: none;
-  font-size: calc(var(--font-size-lg) * 1.15);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-semibold);
   transition: color var(--duration-fast) var(--ease-standard);
 }
 
