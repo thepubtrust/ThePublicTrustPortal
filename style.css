@@ -752,6 +752,14 @@ body {
   border-radius: var(--radius-sm) !important;
 }
 
+/* Make story-meta deadline match PCO deadline styling */
+.story-meta .deadline {
+  background-color: #E8A87C !important; /* Bright light orange - same as PCO deadline tags */
+  color: var(--color-white) !important;
+  padding: var(--space-2) var(--space-6) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
 /* Story Subheading */
 .story-subheading {
   margin-top: var(--space-16);
