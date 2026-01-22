@@ -177,18 +177,50 @@ class PublicTrustApp {
 
     parseArticleDate(dateText) {
         const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth() + 1; // 1-12
+        
+        // Month name to number mapping
+        const monthMap = {
+            'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,
+            'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12,
+            'january': 1, 'february': 2, 'march': 3, 'april': 4, 'may': 5, 'june': 6,
+            'july': 7, 'august': 8, 'september': 9, 'october': 10, 'november': 11, 'december': 12
+        };
         
         // Handle various date formats
         const patterns = [
-            { regex: /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d+)/i, format: (matches) => `${matches[1]} ${matches[2]}, ${currentYear}` },
+            // Full date with year: "Jan 21, 2026" or "January 21, 2026"
             { regex: /(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d+),\s+(\d{4})/i, format: (matches) => `${matches[1]} ${matches[2]}, ${matches[3]}` },
-            { regex: /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d+),\s+(\d{4})/i, format: (matches) => `${matches[1]} ${matches[2]}, ${matches[3]}` }
+            { regex: /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d+),\s+(\d{4})/i, format: (matches) => `${matches[1]} ${matches[2]}, ${matches[3]}` },
+            // Month and year only: "Dec 2025" or "December 2025"
+            { regex: /(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})/i, format: (matches) => {
+                const monthNum = monthMap[matches[1].toLowerCase()];
+                return `${matches[1]} 1, ${matches[2]}`;
+            }},
+            { regex: /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{4})/i, format: (matches) => {
+                const monthNum = monthMap[matches[1].toLowerCase()];
+                return `${matches[1]} 1, ${matches[2]}`;
+            }},
+            // Month and day without year: "Jan 21" or "Dec 23"
+            { regex: /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d+)/i, format: (matches) => {
+                const monthName = matches[1];
+                const day = matches[2];
+                const monthNum = monthMap[monthName.toLowerCase()];
+                // If it's November or December, assume 2025 (last year)
+                // Otherwise assume 2026 (current year)
+                const year = (monthNum >= 11) ? 2025 : 2026;
+                return `${monthName} ${day}, ${year}`;
+            }}
         ];
         
         for (const pattern of patterns) {
             const match = dateText.match(pattern.regex);
             if (match) {
-                return new Date(pattern.format(match));
+                const dateStr = pattern.format(match);
+                const date = new Date(dateStr);
+                if (!isNaN(date.getTime())) {
+                    return date;
+                }
             }
         }
         
