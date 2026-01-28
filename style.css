@@ -782,10 +782,11 @@ body {
 
 
 
-/* News Grid */
+/* News Grid - min column width must allow 4 columns to fit inside .container (1200px)
+   so the 4th column (Featured Outdoor Writing) is not clipped by body overflow-x:hidden */
 .news-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(320px, 1fr));
+  grid-template-columns: repeat(4, minmax(260px, 1fr));
   gap: var(--space-20);
   margin: 0 auto var(--space-32) auto;
   max-width: 1600px;

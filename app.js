@@ -206,9 +206,9 @@ class PublicTrustApp {
                 const monthName = matches[1];
                 const day = matches[2];
                 const monthNum = monthMap[monthName.toLowerCase()];
-                // If it's November or December, assume 2025 (last year)
-                // Otherwise assume 2026 (current year)
-                const year = (monthNum >= 11) ? 2025 : 2026;
+                // Months after current month are from last year (e.g. in Jan, Dec = last Dec)
+                // Months <= current month are this year (e.g. in Jan, Jan = this year)
+                const year = (monthNum > currentMonth) ? (currentYear - 1) : currentYear;
                 return `${monthName} ${day}, ${year}`;
             }}
         ];
