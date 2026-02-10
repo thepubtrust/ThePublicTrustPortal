@@ -699,6 +699,21 @@ body {
   color: var(--color-sage-green);
 }
 
+.featured-cta {
+  font-size: var(--font-size-lg);
+  margin: 0 0 var(--space-16) 0;
+}
+
+.featured-cta a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.featured-cta a:hover {
+  color: var(--color-sage-green);
+}
+
 .featured-comment-link {
   margin-bottom: var(--space-16);
   margin-top: 0;
