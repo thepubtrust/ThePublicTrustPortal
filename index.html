@@ -1313,6 +1313,68 @@
         </div>
     </footer>
 
+    <script>
+        (function addDaysLeftToPCO() {
+            const deadlineEls = document.querySelectorAll(
+                ".public-comment-opportunities .deadline"
+            );
+
+            const monthMap = {
+                jan: 0,
+                feb: 1,
+                mar: 2,
+                apr: 3,
+                may: 4,
+                jun: 5,
+                jul: 6,
+                aug: 7,
+                sep: 8,
+                oct: 9,
+                nov: 10,
+                dec: 11,
+            };
+
+            const now = new Date();
+            const todayStart = new Date(
+                now.getFullYear(),
+                now.getMonth(),
+                now.getDate()
+            ).getTime();
+            const msPerDay = 24 * 60 * 60 * 1000;
+
+            deadlineEls.forEach((el) => {
+                const text = (el.textContent || "").trim();
+                if (!text || text.includes("days left")) return;
+
+                // Match: "Comment By: Mar 26, 2026"
+                const m = text.match(
+                    /\b([A-Za-z]{3})\s+(\d{1,2}),\s+(\d{4})\b/
+                );
+                if (!m) return;
+
+                const mon = monthMap[m[1].toLowerCase()];
+                if (mon === undefined) return;
+
+                const day = Number(m[2]);
+                const year = Number(m[3]);
+                if (!Number.isFinite(day) || !Number.isFinite(year)) return;
+
+                // Treat deadline as end-of-day local time for "days left" math.
+                const deadlineEnd = new Date(year, mon, day + 1).getTime();
+                const daysLeft = Math.ceil((deadlineEnd - todayStart) / msPerDay) - 1;
+
+                const label =
+                    daysLeft < 0
+                        ? "closed"
+                        : daysLeft === 0
+                          ? "0 days left"
+                          : `${daysLeft} days left`;
+
+                el.textContent = `${text} (${label})`;
+            });
+        })();
+    </script>
+
     <script src="app.js?v=202508271532"></script>
 </body>
 </html>
