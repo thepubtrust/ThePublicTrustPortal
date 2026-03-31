@@ -1315,9 +1315,7 @@
 
     <script>
         (function addDaysLeftToPCO() {
-            const deadlineEls = document.querySelectorAll(
-                ".public-comment-opportunities .deadline"
-            );
+            const deadlineEls = document.querySelectorAll(".public-comment-opportunities .deadline");
 
             const monthMap = {
                 jan: 0,
@@ -1363,8 +1361,10 @@
                 const deadlineEnd = new Date(year, mon, day + 1).getTime();
                 const daysLeft = Math.ceil((deadlineEnd - todayStart) / msPerDay) - 1;
 
-                if (daysLeft < 0) {
-                    el.textContent = "Comment period closed";
+                // Hide expired items or items with 0 days left (deadline is today).
+                if (daysLeft <= 0) {
+                    const card = el.closest(".comment-opportunity");
+                    if (card) card.style.display = "none";
                     return;
                 }
 
