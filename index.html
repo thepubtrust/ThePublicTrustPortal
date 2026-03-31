@@ -165,7 +165,7 @@
                             <span class="tag-state">NY</span>
                             <span class="tag-regulatory">State Rulemaking</span>
                             <span class="source">NYSDEC</span>
-                            <span class="deadline">Comment By: Multiple deadlines; see notice (e.g. coolwater Apr 13; antlerless deer May 17, 2026)</span>
+                            <span class="deadline">Comment By: See notice</span>
                         </div>
                     </a>
 
@@ -1344,7 +1344,7 @@
 
             deadlineEls.forEach((el) => {
                 const text = (el.textContent || "").trim();
-                if (!text || text.includes("days left")) return;
+                if (!text || text.includes("days left to comment") || text.includes("Comment period closed")) return;
 
                 // Match: "Comment By: Mar 26, 2026"
                 const m = text.match(
@@ -1363,14 +1363,12 @@
                 const deadlineEnd = new Date(year, mon, day + 1).getTime();
                 const daysLeft = Math.ceil((deadlineEnd - todayStart) / msPerDay) - 1;
 
-                const label =
-                    daysLeft < 0
-                        ? "closed"
-                        : daysLeft === 0
-                          ? "0 days left"
-                          : `${daysLeft} days left`;
+                if (daysLeft < 0) {
+                    el.textContent = "Comment period closed";
+                    return;
+                }
 
-                el.textContent = `${text} (${label})`;
+                el.textContent = `${daysLeft} days left to comment`;
             });
         })();
     </script>
