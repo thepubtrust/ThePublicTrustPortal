@@ -640,7 +640,7 @@ body {
 .site-logo {
   display: block;
   width: 100%;
-  max-width: min(640px, 100%);
+  max-width: min(480px, 100%);
   height: auto;
   margin: 0 auto;
 }
@@ -1673,10 +1673,6 @@ span {
     max-width: 1600px;
   }
   
-  .site-logo {
-    max-width: min(520px, 100%);
-  }
-
   .featured-headline {
     font-size: calc(var(--font-size-3xl) * 1.2);
   }
@@ -1803,10 +1799,6 @@ span {
     padding: 0 var(--space-16);
   }
   
-  .site-logo {
-    max-width: min(480px, 100%);
-  }
-
   .featured-headline {
     font-size: calc(var(--font-size-3xl) * 1.3);
   }
@@ -1875,10 +1867,6 @@ span {
     padding: 0 var(--space-16);
   }
   
-  .site-logo {
-    max-width: min(420px, 100%);
-  }
-
   .featured-headline {
     font-size: calc(var(--font-size-3xl) * 1.4);
   }
