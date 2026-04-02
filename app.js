@@ -114,7 +114,7 @@ class PublicTrustApp {
 
     goHome() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        document.querySelector('.site-title')?.focus();
+        document.querySelector('.site-logo-link')?.focus();
         this.currentFocus = -1;
     }
 

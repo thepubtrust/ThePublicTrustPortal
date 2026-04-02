@@ -621,21 +621,28 @@ body {
   text-align: center;
 }
 
-.site-title {
-	font-family: 'League Spartan', sans-serif;
-	font-size: calc(var(--font-size-4xl) * 1.44);
-	font-weight: 700;
-	color: var(--color-sage-green);
-	margin: 0;
-	letter-spacing: 2px;
-	text-shadow: none !important;
+.site-branding {
+  margin: 0;
 }
 
-.site-tagline {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-secondary);
-  margin: var(--space-8) 0 0 0;
-  font-style: italic;
+.site-logo-link {
+  display: inline-block;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.site-logo-link:focus-visible {
+  outline: 3px solid var(--color-sage-green);
+  outline-offset: var(--space-8);
+  border-radius: var(--radius-sm);
+}
+
+.site-logo {
+  display: block;
+  width: 100%;
+  max-width: min(640px, 100%);
+  height: auto;
+  margin: 0 auto;
 }
 
 /* Main Content */
@@ -1482,10 +1489,6 @@ span {
     padding: 0;
   }
 
-  .site-title {
-    font-size: var(--font-size-3xl);
-  }
-
   .featured-headline {
     font-size: var(--font-size-2xl);
   }
@@ -1670,12 +1673,10 @@ span {
     max-width: 1600px;
   }
   
-  /* Make titles bigger on mobile */
-  .site-title {
-    font-size: calc(var(--font-size-4xl) * 1.6);
-    letter-spacing: 2px;
+  .site-logo {
+    max-width: min(520px, 100%);
   }
-  
+
   .featured-headline {
     font-size: calc(var(--font-size-3xl) * 1.2);
   }
@@ -1802,12 +1803,10 @@ span {
     padding: 0 var(--space-16);
   }
   
-  /* Even bigger titles on small mobile */
-  .site-title {
-    font-size: calc(var(--font-size-4xl) * 1.8);
-    letter-spacing: 2px;
+  .site-logo {
+    max-width: min(480px, 100%);
   }
-  
+
   .featured-headline {
     font-size: calc(var(--font-size-3xl) * 1.3);
   }
@@ -1876,12 +1875,10 @@ span {
     padding: 0 var(--space-16);
   }
   
-  /* Maximum title sizes on very small mobile */
-  .site-title {
-    font-size: calc(var(--font-size-4xl) * 2);
-    letter-spacing: 2px;
+  .site-logo {
+    max-width: min(420px, 100%);
   }
-  
+
   .featured-headline {
     font-size: calc(var(--font-size-3xl) * 1.4);
   }
@@ -2324,7 +2321,6 @@ span:not(.story-category):not(.item-type.major-policy) {
 /* Ensure all colors are consistent across mobile and desktop */
 @media (max-width: 768px) {
   /* Force same colors on mobile as desktop */
-  .site-title,
   .featured-headline a:hover,
   .news-item h4 a:hover,
   .links-grid a:hover,
